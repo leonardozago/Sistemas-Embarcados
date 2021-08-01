@@ -53,6 +53,12 @@ Alunos:</p>
 
 ## 3.1) Habilitação dos pinos para comunicação CAN na placa (CAN0)
 
+O problema todo consiste (e o grupo nao conseguiu resolvê-lo por completo ao final) em habilitar a comunicação CAN0 na placa. Entretanto, tal problema será discutido e várias etapas executadas com sucesso serão discutidas no decorre desta sessão. Ao executar o comando a seguir na placa Toradex, pôde-se evidenciar que a comunicação can não se encontra habilitada por default, sendo necessários diversos passo que o grupo realizou a fim de tentar solucionar a questão.
+
+<h3 align="center"> <img src="./Imagens/cannot find device.PNG" 
+     alt="print1" height="100">
+</h3>
+
 Inicialmente, o grupo encontrou um documento no site do fabricante da placa (Toradex) relatando algumas alterações necessárias para a adaptação da placa para emitir e receber protocolos de comunicação CAN. (segue o link de referência: https://developer.toradex.com/knowledge-base/can-linux#tab-bsp-5). Nele se evidenciam dois maneira diferentes de alterar alguns arquivos na placa para habilitar a forma de comunicação CAN0 entre os pinos 196/194 ou CAN1, utilizando-se dos pinos 63/55.
 
 <h3 align="center"> <img src="./Imagens/print1.png" 
