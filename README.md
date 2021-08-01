@@ -101,9 +101,9 @@ Para o projeto, foram disponibilizadas duas placas Mbed LPC1768 e para cada pata
 
 Para o controle PWM foi necessária uma análise do movimento das patas da formiga, sendo dividido nos seguintes passos: 
 
-Subida da pata: Deslocamento horizontal e vertical positivos;
-Descida da pata: Deslocamento horizontal positivo e vertical negativo;
-Pata em contato com o chão: Deslocamento horizontal negativo e vertical nulo.
+1. Subida da pata: Deslocamento horizontal e vertical positivos;
+2. Descida da pata: Deslocamento horizontal positivo e vertical negativo;
+3. Pata em contato com o chão: Deslocamento horizontal negativo e vertical nulo.
 
 Dessa forma, foi implementada a lógica das velocidades de cada um dos motores, que pode ser checada detalhadamente no código a seguir:
 
