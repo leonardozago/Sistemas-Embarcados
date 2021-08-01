@@ -8,7 +8,7 @@ Motor::Motor(PinName pwm, PinName fwd, PinName rev):
     _pwm.period(0.001);
     _pwm = 0;
 
-    //Seta condição inicial para os outputs
+    //Seta condição inicial para outputs
     _fwd = 0;
     _rev = 0;
 }
