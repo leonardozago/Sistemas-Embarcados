@@ -11,30 +11,30 @@ void mov_frente(){
     //movimento de subida da pata
     m1.speed(1);
     m2.speed(1);
-    wait(10);
+    wait(5);
     //movimento de descida da pata
     m1.speed(1);
     m2.speed(-1);
-    wait(10);
+    wait(5);
     //período em que a pata está em contato com o chão
     m1.speed(-1);
     m2.speed(0);
-    wait(20);
+    wait(10);
 }
 
 void mov_tras(){
     //movimento de subida da pata
     m1.speed(-1);
     m2.speed(1);
-    wait(10);
+    wait(5);
     //movimento de descida da pata
     m1.speed(-1);
     m2.speed(-1);
-    wait(10);
+    wait(5);
     //período em que a pata está em contato com o chão
     m1.speed(1);
     m2.speed(0);
-    wait(20);
+    wait(10);
 }
 
 
