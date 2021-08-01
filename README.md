@@ -44,9 +44,14 @@ Alunos:</p>
 <h3 align="center"> <img src="./Imagens/Diagrama de Blocos_Formiga.PNG" 
      alt="DB" height="500">
 </h3>
+
+  O fluxo de funciomento será da seguinte forma, a placa da toradex envia uma mensagem de funcionamento via protocolo Can para as placas da Mbed. Recebendo esta informação a placa da Mbed executa a rotina programada para controle dos PWM de acordo com a mensagem recebida (Levantan, Anda para frente, Abaixa, Vire a direita, etc.)
   
   
 
 # 3) Desenvolvimento
 
 # 4) Concluões finais
+--> Protocolo Can facilita a adiação de novos componentes "sistema de varal"
+--> Parte do codigo estar na mbed diminui o processamento realizado no processador com S.O. possibilitanto adição de novas funcionalidades no futuro (câmera, braço robótico entre outros)
+
