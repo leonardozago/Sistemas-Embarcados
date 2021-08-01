@@ -41,8 +41,8 @@ static void MakeAndSendCANFrame_frente(void)
     fra.can_id = 0x100; //coloca o id da comunicação CAN
     fra.can_dlc = 2; //número de bytes da mensagem
    
-    fra.data[0] = 0x66;
-    fra.data[1] = 0x72;
+    fra.data[0] = 0x66; //codigo ascii para "f"
+    fra.data[1] = 0x72; // "r"
     //fra.data[2] = ;
     //fra.data[3] = ;
     //fra.data[4] = ;
@@ -76,8 +76,8 @@ static void MakeAndSendCANFrame_tras(void)
     fra.can_id = 0x100; //coloca o id da comunicação CAN
     fra.can_dlc = 2; //número de bytes da mensagem
    
-    fra.data[0] = 0x74;
-    fra.data[1] = 0x72;
+    fra.data[0] = 0x74; //codigo ascii para "t"
+    fra.data[1] = 0x72; //"r"
     //fra.data[2] = ;
     //fra.data[3] = ;
     //fra.data[4] = ;
