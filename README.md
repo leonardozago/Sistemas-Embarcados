@@ -12,6 +12,10 @@ Departamento de Engenharia Elétrica e Computação </p> </p> </p>
 
 </h3>
 
+<h3 align="center"> <img src="./Imagens/unnamed.png" 
+     alt="Logo EESC" height="100">
+</h3>
+  
 Professores: </p>
 **Glauco Augusto de Paula Caurin** </p>
 **Daniel Varela Magalhães**
@@ -28,6 +32,8 @@ Alunos:</p>
 </h5>
 
 # 1) Objetivos
+
+
 
 # 2) Materiais e métodos
 
