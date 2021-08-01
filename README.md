@@ -42,7 +42,7 @@ Alunos:</p>
   </h3>
 
 <h3 align="center"> <img src="./Imagens/Diagrama de Blocos_Formiga Mecatrônica.PNG" 
-     alt="DB" height="100">
+     alt="DB" height="600">
 </h3>
   
   
