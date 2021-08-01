@@ -51,6 +51,32 @@ Alunos:</p>
 
 # 3) Desenvolvimento
 
+Inicialmente, o grupo encontrou um documento no site do fabricante da placa (Toradex) relatando algumas alterações necessárias para a adaptação da placa para emitir e receber protocolos de comunicação CAN. (segue o link de referência: https://developer.toradex.com/knowledge-base/can-linux#tab-bsp-5). Nele se evidenciam dois maneira diferentes de alterar alguns arquivos na placa para habilitar a forma de comunicação CAN0 entre os pinos 196/194 ou CAN1, utilizando-se dos pinos 63/55.
+
+<h3 align="center"> <img src="./Imagens/print1.png" 
+     alt="print1" height="500">
+</h3>
+
+Adicionalmente, dessa mesma fonte, encontrou-se a informação que devido à versão do kernel linux disponível em nossa placa Colibri VF50 não é possível realizar device tree overlay, que são fragmentos especiais de device trees que permitem que você substitua partes específicas, antes de inicializar o sistema operacional. Ou seja, desse modo é possível aproveitar diversas camadas de software de uma placa semelhante e realizar apenas adequações necessárias ao kernel em uma camada mais exterior, aproveitando grande parte do que já foi desenvolvido e adaptado por outros desenvolvedores.
+
+<h3 align="center"> <img src="./Imagens/print2.jpg" 
+     alt="print1" height="70">
+</h3>
+
+Para o download da respectiva Cross Toolchain necessária, identificou inicialmente a versão do Embedded Linux BSP para uso da versão adequada. Realizando a consulta no artigo (segue o link de referência: https://developer.toradex.com/knowledge-base/embedded-linux-release-matrix) foi possível identificar a versão BSP: 2.8.7 do Linux em nossa placa. 
+
+<h3 align="center"> <img src="./Imagens/print3.png" 
+     alt="print1" height="100">
+</h3>
+
+Em seguida, acessou-se o link para download da Cross Toolchain correspondente (segue link de referência: https://developer.toradex.com/knowledge-base/build-u-boot-and-linux-kernel-from-source-code#tab-embedded-linux-bsp-28). E realizou-se o donwload do software de compilação conforme indicado pelas linhas de comando abaixo.
+
+<h3 align="center"> <img src="./Imagens/print4.png" 
+     alt="print1" height="500">
+</h3>
+
+Acessou-se o github da Toradex para encontrar o arquivo mencionado no artigo inicial. Acessando o caminho mencionado e mudando a versão para a toradex_vf_4.4, encontrou-se o arquivo arch/arm/boot/dts/vf-colibri-eval-v3.dtsi. Como foi encontrado referências mencionando o melhor uso de CAN1 para o nosso propósito, optou-se por essa opção. Nesse arquivo é possível identificar o status do nó de CAN1 que é necessário desabilitar e também as duas configurações de GPIO pad que são necessárias remover. Tais pinos podem assumir várias funções conforme exposto no datasheet da placa e é necessário ativar a função adequada. Apagou-se esses dois pinos portanto para que tais pinos estejam disponíveis para RX e TX.
+
 # 4) Concluões finais
 --> Protocolo Can facilita a adiação de novos componentes "sistema de varal"
 --> Parte do codigo estar na mbed diminui o processamento realizado no processador com S.O. possibilitanto adição de novas funcionalidades no futuro (câmera, braço robótico entre outros)
