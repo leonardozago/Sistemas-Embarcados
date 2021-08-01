@@ -1,21 +1,4 @@
-/* 
- * This file is part of the super_easy_can_tx (https://github.com/davidevansg/super_easy_can_tx).
- * Copyright (c) 2020 David Evans.
- * 
- * This program is free software: you can redistribute it and/or modify  
- * it under the terms of the GNU General Public License as published by  
- * the Free Software Foundation, version 3.
- *
- * This program is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of 
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU 
- * General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License 
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
- */
-
-/*********** Includes *************/
+//Definições e bibliotecas
 #include <fcntl.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -41,99 +24,83 @@
 
 #endif
 
-/*********** Static Functions ***********/
+//Declaração das funções e variaveis estáticas
 static void MakeAndSendFrame(void);
 static void PrintCANFrame(struct can_frame *fra);
 static uint8_t CANIfcInit(void);
-/*********** Static Variables ***********/
 static int can_fd;
-/*********** Global Variables ***********/
 
-/************************************************************
- * Function Name MakeAndSendCANFrame
- *
- * Purpose: Declare a CAN frame, give it an ID and DLC,
- *              and send it! Maybe print it, if you're
- *              interested
- *
- * \param[in] void
- *
- * \return
- *      void
- ***********************************************************
- */
-static void MakeAndSendCANFrame1(void)
+
+/*Função que cria a mensagem no padrão do protocolo can com o ID e tamanho da mensgem e depois envia a mensagem "frente" via a struct do formato can_frame */
+static void MakeAndSendCANFrame_frente(void)
 {
     struct can_frame fra;
-    uint8_t size = 8;
-    fra.can_id = 0x100;
-    fra.can_dlc = 8;
-
+    uint8_t size = 0;
     
-    fra.data[0] = "h";
-    fra.data[1] = "e";
-    fra.data[2] = "l";
-    fra.data[3] = "l";
-    fra.data[4] = "o";
-    fra.data[5] = "p";
-    fra.data[6] = "e";
-    fra.data[7] = "e";
+    
+    fra.can_id = 0x100; //coloca o id da comunicação CAN
+    fra.can_dlc = 2; //número de bytes da mensagem
+   
+    fra.data[0] = 0x66;
+    fra.data[1] = 0x72;
+    //fra.data[2] = ;
+    //fra.data[3] = ;
+    //fra.data[4] = ;
+    //fra.data[5] = ;
+    //fra.data[6] = ;
+    //fra.data[7] = ;
 
+//Check se a mensagem conseguiu ser criada e enviada com sucesso
     size = send(can_fd, &fra, sizeof(struct can_frame), MSG_DONTWAIT);
     if(size != sizeof(struct can_frame))
     {
-        printf("Problem writing frame\nIs your CAN interface 'up'\n");
+        printf("A mensagem não pode ser criada e enviada\n");
         return;
     }
     else
     {
-        // Sending success, let's print what was sent
+        //se ela for enviada com sucesso, printa a mensagem
         PrintCANFrame(&fra);
+        printf("mensagem enviada com sucesso\n");
     }
 }
 
 
-static void MakeAndSendCANFrame(void)
+/*Função que cria a mensagem no padrão do protocolo can com o ID e tamanho da mensgem e depois envia a mensagem "tras" via a struct do formato can_frame */
+static void MakeAndSendCANFrame_tras(void)
 {
     struct can_frame fra;
-    uint8_t size = 8;
-    fra.can_id = 0x100;
-    fra.can_dlc = 8;
-
+    uint8_t size = 0;
     
-    fra.data[0] = "t";
-    fra.data[1] = "t";
-    fra.data[2] = "t";
-    fra.data[3] = "t";
-    fra.data[4] = "t";
-    fra.data[5] = "t";
-    fra.data[6] = "t";
-    fra.data[7] = "e";
+    
+    fra.can_id = 0x100; //coloca o id da comunicação CAN
+    fra.can_dlc = 2; //número de bytes da mensagem
+   
+    fra.data[0] = 0x74;
+    fra.data[1] = 0x72;
+    //fra.data[2] = ;
+    //fra.data[3] = ;
+    //fra.data[4] = ;
+    //fra.data[5] = ;
+    //fra.data[6] = ;
+    //fra.data[7] = ;
 
+//Check se a mensagem conseguiu ser criada e enviada com sucesso
     size = send(can_fd, &fra, sizeof(struct can_frame), MSG_DONTWAIT);
     if(size != sizeof(struct can_frame))
     {
-        printf("Problem writing frame\nIs your CAN interface 'up'\n");
+        printf("A mensagem não pode ser criada e enviada\n");
         return;
     }
     else
     {
-        // Sending success, let's print what was sent
-        PrintCANFrame(&fra);
+        //se ela for enviada com sucesso, printa a mensagem
+        PrintCANFrame(&fra);//função que printa a mensagem no formato CAN
+        printf("mensagem enviada com sucesso\n");
     }
 }
-/************************************************************
- * Function Name PrintCANFrame
- *
- * Purpose: Prints the contents of a given CAN frame.
- *
- * \param[in] *fra
- *      A pointer to can_frame structure (see /linux/can.h)
- *
- * \return void
- *
- ***********************************************************
- */
+
+/*Função utilizada para printar a mensagem enviada via o protocolo CAN */
 static void PrintCANFrame(struct can_frame *fra)
 {
     if(fra != NULL)
@@ -148,94 +115,83 @@ static void PrintCANFrame(struct can_frame *fra)
     }
     else
     {
-        printf("fra null\n");
+        printf("Mensagem Vazia\n");
     }
 }
 
-/************************************************************
- * Function Name 
- *
- * Purpose: Initialises the CAN interface and sets up
- *          the correpsonding options
- *
- * \param[in] void
- *
- * \return
- *      SUCCESS if successfully created, otherwise
- *      FAILURE
- ***********************************************************
- */
+
+/*Função que cria o socket e estabelece a comunicação via can */
 static uint8_t CANIfcInit(void)
 {
+    //cria as variaveis do tipo struct
     struct ifreq ifr;
     struct sockaddr_can addr;
 
-    /* Create a socket */
-    can_fd = socket(AF_CAN, SOCK_RAW, CAN_RAW);
-    if (can_fd < 0)
+    /*cria o socket */
+    can_fd = socket(AF_CAN, SOCK_RAW, CAN_RAW); //abertura do socket do tipo RAW, segundo a documentação do CAN_Utils
+    
+    if (can_fd < 0)//verifica se o socket conseguiu ser criado
     {
-        printf("Cannot create socket, quitting\n");
+        printf("Falha na abertura do Socket... Saindo!\n");
         return FAILURE;
     }
     strcpy(ifr.ifr_name, IF_VCAN0);
 
-    /* Associate socket with interface (e.g. "vcan0" */
-    if(ioctl(can_fd, SIOCGIFINDEX, &ifr) < 0)
+    //Associa o socket com a interface "Vcan0"
+    if(ioctl(can_fd, SIOCGIFINDEX, &ifr) < 0) //verifica se existe a interface Vcan0
     {
-        printf("Cannot link socket with interface - does the interface exist?\n");
+        printf("Não foi encontrada a porta Vcan0...\n");
         return FAILURE;
     }
 
     addr.can_family = AF_CAN;
     addr.can_ifindex = ifr.ifr_ifindex;
 
-    if (bind(can_fd, (struct sockaddr *)&addr, sizeof(addr)) < 0)
+    if (bind(can_fd, (struct sockaddr *)&addr, sizeof(addr)) < 0)//Verifica se a conexão foi estabelecida com sucesso
     {
-        printf("Unable to bind socket, quitting\n");
+        printf("Não foi possível estabelecer a conexão via socket\n");
         return FAILURE;
     }
 
     return SUCCESS;
 }
 
-/************************************************************
- * Function Name main
- *
- * Purpose: main entry point for the application
- *
- * \param[in] void
- *
- * \return
- *      0 - when done.
- ***********************************************************
- */
+/* Função main para realizar a escolha da mensagem a ser enviada*/
  int escolha;
 int main(int argc, char *argv[])
 {
-    /* setup the CAN interface */
-    if (CANIfcInit() == SUCCESS)
+    
+    if (CANIfcInit() == SUCCESS) //inicia a comunicação Can e entra no programa caso ela tenha sucedido
     {
-    while(1)
-    {
-    printf("escolha a função: 1 ou 2");
-    scanf("%d", &escolha);
-    if(escolha==1)
-    {
-    MakeAndSendCANFrame();
-    }
-    if(escolha==2)
-    {
-    MakeAndSendCANFrame1();
-    }
-    }
+    	while(1)
+    	{
+    		printf("Escolha o número da função a ser realizada pela Formiga:\n 1 - Formiga ir pra frente \n 2 - Formiga ir para trás\n 3 - Fechar conexão\n");
+    		printf("Digite o número:");
+    		scanf("%d", &escolha);
+    		
+    	
+    		if(escolha==1)
+    		{
+    			MakeAndSendCANFrame_frente();
+    		}
+    	
+    		if(escolha==2)
+    		{
+    			MakeAndSendCANFrame_tras();
+    		}
+    		if(escolha==3)
+    		{
+    			break;
+    		}
+    	}
     }
 
-    /* Finished, close the file descriptor */
+    //fechando a conexão
     if(can_fd > 0)
     {
         close(can_fd);
     }
 
-    printf("quiting...\n");
+    printf("Saindo...\n");
     return 0;
 }
