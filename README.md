@@ -37,7 +37,15 @@ Alunos:</p>
 
 
 # 2) Materiais e métodos
-  Para a realização do projeto, foram utilizadas a placa Colibri VF50 da Toradex e 2 placas Mbed LPC1768. O diagrama de blocos a seguir demonstra a 
+  Para a realização do projeto, foram utilizadas a placa Colibri VF50 da Toradex e 2 placas Mbed LPC1768. O diagrama de blocos a seguir demonstra a estrutura de comunicação desde a placa com o S.O. embarcado até a informação de PWM dos motores.
+  
+  </h3>
+
+<h3 align="center"> <img src="./Imagens/Diagrama de Blocos_Formiga Mecatrônica.PNG" 
+     alt="DB" height="100">
+</h3>
+  
+  
 
 # 3) Desenvolvimento
 
