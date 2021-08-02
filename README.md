@@ -51,7 +51,7 @@ Alunos:</p>
 
 # 3) Desenvolvimento
 
-## 3.1) Habilitação dos pinos para comunicação CAN na placa (CAN0)
+## 3.1) Habilitação dos pinos para comunicação CAN Colibri VF50 (CAN0)
 
 O problema todo consiste (e o grupo nao conseguiu resolvê-lo por completo ao final) em habilitar a comunicação CAN0 na placa. Entretanto, tal problema será discutido e várias etapas executadas com sucesso serão discutidas no decorre desta sessão. Ao executar o comando a seguir na placa Toradex, pôde-se evidenciar que a comunicação can não se encontra habilitada por default, sendo necessários diversos passo que o grupo realizou a fim de tentar solucionar a questão.
 
@@ -93,7 +93,12 @@ O repositório foi clonado para que as mudanças mencionadas pudessem ser realiz
 
 O último passo consiste em compilar o device tree que alteramos. Analisando o Kernel Compilation, devemos alterar as configurações de como o Kernel será compilado. Para a placa em questão, deve ser o colibri_vf_defconfig. Assim, executou-se o comando make colibri_vf_defconfig. Posteriormente, foi feito o build da device tree alterada, ou seja, vf500-colibri-eval-v3.dtb. É necessário, por último realizar a substituição do arquivo .dtb pelo arquivo compilado. Entretanto, não se conseguiu localizar o arquivo correto para realizar a substituição ou achar o arquivo compilado para a placa. Dessa forma, o time não conseguiu identificar a origem do problema: se consiste na compilação do arquivo para a placa ou achar o arquivo respectivo já existente.
 
-## 3.2) Kartey
+## 3.2) Envio de Mensagens protocolo Can através da Colibri VF50
+Para o desenvolvimento do código para o envio de mensagens através do protocolo CAN, foi utilizada a biblioteca "Can_utils" que permite estabelecer a conexão via Socket. Como não foi possível, como dito anteriormente, ativar os pinos Can na Colibri VF50, foi utilizado uma porta Can virtual que pode ser criada no Linux para testar o código de comunicação. Sendo possível através do comando "candump" verificar se as mensagens estavam sendo de fato enviadas.
+
+IMG
+
+O programa rodando pergunta qual movimento é desejado que a formiga faça, se selecionado "andar para frente" as letra "f" e "r" serão enviadas via protocolo CAN, caso selecionado "andar para trás" as letras "t" e "r". A interpretação da mensagem e controle dos motores para o movimento ser realizado de fato está na Mbed.
 
 ## 3.3) Controle dos Motores via Mbed
 
