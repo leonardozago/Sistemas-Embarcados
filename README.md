@@ -23,7 +23,7 @@ Professores: </p>
 Alunos:</p>
 **[Gustavo Batistom Vasquez](https://github.com/gustavobvasquez)** *n° USP: 9805150* </p>
 **[Leonardo Ferreira Rosa Zago](https://github.com/leonardozado)** *n° USP: 9805355* </p>
-**[Leonardo Rodrigues de Ávila Oliverira](https://github.com/Leonardorodriguesoliveira)** *n° USP: 9805205* </p>
+**[Leonardo Rodrigues de Ávila Oliveira](https://github.com/Leonardorodriguesoliveira)** *n° USP: 9805205* </p>
 
 <h5 align="center"> 
   
