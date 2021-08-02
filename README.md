@@ -96,9 +96,17 @@ O último passo consiste em compilar o device tree que alteramos. Analisando o K
 ## 3.2) Envio de Mensagens protocolo Can através da Colibri VF50
 Para o desenvolvimento do código para o envio de mensagens através do protocolo CAN, foi utilizada a biblioteca "Can_utils" que permite estabelecer a conexão via Socket. Como não foi possível, como dito anteriormente, ativar os pinos Can na Colibri VF50, foi utilizado uma porta Can virtual que pode ser criada no Linux para testar o código de comunicação. Sendo possível através do comando "candump" verificar se as mensagens estavam sendo de fato enviadas.
 
-IMG
+<h3 align="center"> <img src="./Imagens/Porta_virtual_can.png" 
+     alt="print1" height="500">
+</h3>
 
-O programa rodando pergunta qual movimento é desejado que a formiga faça, se selecionado "andar para frente" as letra "f" e "r" serão enviadas via protocolo CAN, caso selecionado "andar para trás" as letras "t" e "r". A interpretação da mensagem e controle dos motores para o movimento ser realizado de fato está na Mbed.
+O programa Socket_Can rodando pergunta qual movimento é desejado que a formiga faça, se selecionado "andar para frente" as letra "f" e "r" serão enviadas via protocolo CAN, caso selecionado "andar para trás" as letras "t" e "r". A interpretação da mensagem e controle dos motores para o movimento ser realizado de fato está na Mbed.
+
+<h3 align="center"> <img src="./Imagens/Programa.png" 
+     alt="print1" height="500">
+</h3>
+
+Como pode-se notar na imagem demonstrando o funcionamento do código, quando é enviado o comando 1 (ir para frente), temos os códigos em ascii das letras "f" e "r" aparecendo no candump, significando que a mensagem foi enviada e chegou ao destino. Da mesma forma ocorre com o comando 2, onde chegam as letras "t" e "r". Quando o digitado o comando 3, o Socket é fechado e a comunicação é interrompida.
 
 ## 3.3) Controle dos Motores via Mbed
 
