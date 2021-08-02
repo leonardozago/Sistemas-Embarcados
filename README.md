@@ -130,6 +130,5 @@ A ideia é que, através do comando "can0.read(msg)", a Mbed seja capaz de ident
 
 
 # 4) Concluões finais
---> Protocolo Can facilita a adiação de novos componentes "sistema de varal"
---> Parte do codigo estar na mbed diminui o processamento realizado no processador com S.O. possibilitanto adição de novas funcionalidades no futuro (câmera, braço robótico entre outros)
+Pode-se notar que a presença de um S.O. em um sistema embarcado pode ser de grande ajuda no desenvolvimento de um projeto, trazendo muita flexibilidade para as aplicações. Também pôde-se notar a eficiencia da utilização do protocolo CAN uma vez que a comunicação é estabelecida se torna muito fácil de inserir outros dispositivos ao mesmo barramento de comunicação. Outro ponto interessante do projeto é utilizar também o poder de processamento da Mbed, deixando o código de controle dos motores dentro dessas placas, dessa forma se torna possível a inclusão em projetos futuros de outras aplicações, como implementar a visão do robo ou qualquer outro sensor e controle que necessite do poder de processamento da placa da Toradex e também do sistema opercional linux 
 
