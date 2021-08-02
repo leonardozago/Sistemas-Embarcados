@@ -107,6 +107,9 @@ Para o controle PWM foi necessária uma análise do movimento das patas da formi
 
 Dessa forma, foi implementada a lógica das velocidades de cada um dos motores, com o auxílio de uma biblioteca Motor.h contendo a definição dos parâmetros e da função velocidade. Para a simulação, os pinos 23 e 24 de PwmOut da Mbed foram definidos para os movimentos horizontal e vertical, respectivamente. O código detalhado com a lógica pode ser checado no caminho Mbed/main.c.
 
+<h3 align="center"> <img src="./Imagens/mbed.PNG" 
+     alt="DB" height="500">
+</h3>
 
 Foi definido pelo grupo de projeto que a formiga realizaria dois movimentos diferentes, deslocamento para frente e para trás e, para saber qual comando enviar aos motores, foi necessário configurar o código para que ele pudesse receber a mensagem da Toradex via Protocolo CAN. Para isso, a solução proposta foi baseada nas instruções presentes no site https://os.mbed.com/users/WiredHome/notebook/can---getting-started/. 
 
