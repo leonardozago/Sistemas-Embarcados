@@ -97,7 +97,7 @@ O último passo consiste em compilar o device tree que alteramos. Analisando o K
 
 ## 3.3) Controle dos Motores via Mbed
 
-Para o projeto, foram disponibilizadas duas placas Mbed LPC1768 e para cada pata, serão necessários dois motores para se encarregarem, respectivamente, dos movimentos horizontal e vertical, totalizando 12 motores. Dessa forma, cada Mbed ficará responsável pelo controle de 6 motores.
+Para o projeto, foram disponibilizadas duas placas Mbed LPC1768 e para cada pata, serão necessários dois motores para se encarregarem, respectivamente, dos movimentos horizontal e vertical, totalizando 12 motores. Dessa forma, cada Mbed ficará responsável pelo controle de 6 motores ou 3 patas.
 
 Para o controle PWM foi necessária uma análise do movimento das patas da formiga, sendo dividido nos seguintes passos: 
 
@@ -105,12 +105,12 @@ Para o controle PWM foi necessária uma análise do movimento das patas da formi
 2. Descida da pata: Deslocamento horizontal positivo e vertical negativo;
 3. Pata em contato com o chão: Deslocamento horizontal negativo e vertical nulo.
 
-Dessa forma, foi implementada a lógica das velocidades de cada um dos motores, com o auxílio de uma biblioteca Motor.h contendo a definição dos parâmetros e da função velocidade. Os pinos 23 e 24 de PwmOut da Mbed foram definidos para os movimentos horizontal e vertical, respectivamente. O código detalhado com a lógica pode ser checado no caminho Mbed/main.c.
+Dessa forma, foi implementada a lógica das velocidades de cada um dos motores, com o auxílio de uma biblioteca Motor.h contendo a definição dos parâmetros e da função velocidade. Para a simulação, os pinos 23 e 24 de PwmOut da Mbed foram definidos para os movimentos horizontal e vertical, respectivamente. O código detalhado com a lógica pode ser checado no caminho Mbed/main.c.
 
 
-Foi definido pelo grupo de projeto que a formiga realizaria dois movimentos diferentes, deslocamento para frente e para trás e, para saber qual comando enviar aos motores, foi necessário configurar o código para que ele pudesse receber a mensagem da Toradex via Protocolo CAN. Para isso, a implementação foi baseada nas instruções presentes no site os.mbed.com/users/WiredHome/notebook/can---getting-started/. 
+Foi definido pelo grupo de projeto que a formiga realizaria dois movimentos diferentes, deslocamento para frente e para trás e, para saber qual comando enviar aos motores, foi necessário configurar o código para que ele pudesse receber a mensagem da Toradex via Protocolo CAN. Para isso, a implementação foi baseada nas instruções presentes no site https://os.mbed.com/users/WiredHome/notebook/can---getting-started/. 
 
-A ideia é que, através do comando can0.read(msg), a Mbed seja capaz de identificar se a mensagem foi, de fato, recebida, sendo “msg” a mensagem CAN. A mensagem pode ser acessada com o comando msg.data, que pode armazenar até 8 bytes, e compara com “fr” (comando frente) e “tr” (comando trás) através dos seus respectivos valores em hexadecimal. Dessa forma, o código acessa a lógica de cada um dos comandos e envia aos motores.
+A ideia é que, através do comando "can0.read(msg)", a Mbed seja capaz de identificar se a mensagem foi, de fato, recebida, sendo “msg” a mensagem CAN. A mensagem pode ser acessada com o comando "msg.data", que pode armazenar até 8 bytes, e é comparada com “fr” (comando frente) e “tr” (comando trás) através dos seus respectivos valores em hexadecimal. Dessa forma, o código acessa a lógica de cada um dos comandos e envia aos motores.
 
 
 # 4) Concluões finais
